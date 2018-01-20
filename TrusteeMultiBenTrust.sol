@@ -18,11 +18,29 @@ contract TrusteeMultiBenTrust {
         require (msg.sender == owner);
         trustees[_trustee] = true;
     }
+    
+    function unregisterTrustee (address _trustee) payable public {
+        // Only the owner can register beneficiaries
+        require (msg.sender == owner);
+        trustees[_trustee] = false;
+    }
 
     function registerBeneficiary (address _ben) payable public {
         // Only the owner can register beneficiaries
         require (msg.sender == owner);
         beneficiaries.push(_ben);
+    }
+    
+    function unregisterBeneficiary (address _ben) payable public {
+        // Only the owner can register beneficiaries
+        require (msg.sender == owner);
+        uint i = 0;
+        for (i; i < beneficiaries.length; i++) {
+            if (beneficiaries[i] == _ben) {
+                delete beneficiaries[i];
+                return;
+            }
+        }
     }
 
     function deposit() payable public returns (bool) {
