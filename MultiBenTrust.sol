@@ -19,7 +19,7 @@ contract MultiBenTrust {
 
     function deposit() payable public returns (bool) {
        return true;
-     }
+    }
      
     function withdraw (uint percentage) payable public returns (bool) {
 
