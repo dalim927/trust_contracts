@@ -7,31 +7,31 @@ contract TrusteeMultiBenTrust {
     address[] public beneficiaries;
     mapping (address => bool) public trustees;
   
-    function TrusteeMultiBenTrust(string _trustName) payable public {
+    function TrusteeMultiBenTrust(string _trustName) public {
         trustName = _trustName;
         owner = msg.sender;
         registerTrustee (msg.sender);
     }
      
-    function registerTrustee (address _trustee) payable public {
+    function registerTrustee (address _trustee) public {
         // Only the owner can register beneficiaries
         require (msg.sender == owner);
         trustees[_trustee] = true;
     }
     
-    function unregisterTrustee (address _trustee) payable public {
+    function unregisterTrustee (address _trustee) public {
         // Only the owner can register beneficiaries
         require (msg.sender == owner);
         trustees[_trustee] = false;
     }
 
-    function registerBeneficiary (address _ben) payable public {
+    function registerBeneficiary (address _ben) public {
         // Only the owner can register beneficiaries
         require (msg.sender == owner);
         beneficiaries.push(_ben);
     }
     
-    function unregisterBeneficiary (address _ben) payable public {
+    function unregisterBeneficiary (address _ben) public {
         // Only the owner can register beneficiaries
         require (msg.sender == owner);
         uint i = 0;
@@ -47,7 +47,7 @@ contract TrusteeMultiBenTrust {
        return true;
      }
      
-    function withdraw (uint percentage) payable public returns (bool) {
+    function withdraw (uint percentage) public returns (bool) {
         // only a trustee can trigger a withdrawal
         require (trustees[msg.sender]);
 

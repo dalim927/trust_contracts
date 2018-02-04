@@ -6,12 +6,12 @@ contract MultiBenTrust {
     address public owner;
     address[] public beneficiaries;
   
-    function MultiBenTrust(string _trustName) payable public {
+    function MultiBenTrust(string _trustName) public {
         trustName = _trustName;
         owner = msg.sender;
     }
      
-    function registerBeneficiary (address _ben) payable public {
+    function registerBeneficiary (address _ben) public {
         // Only the owner can register beneficiaries
         require (msg.sender == owner);
         beneficiaries.push(_ben);
@@ -21,7 +21,7 @@ contract MultiBenTrust {
        return true;
     }
      
-    function withdraw (uint percentage) payable public returns (bool) {
+    function withdraw (uint percentage) public returns (bool) {
 
         // percentage must be greater than zero and less than or equal to 100
         require (percentage > 0 && percentage <= 100);
